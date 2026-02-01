@@ -1,0 +1,38 @@
+name: Deploy to OVH (static Nuxt)
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Generate static site
+        run: npm run generate
+
+      # Upload only the generated static site
+      - name: Upload via SFTP
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.OVH_SFTP_HOST }}
+          username: ${{ secrets.OVH_SFTP_USER }}
+          password: ${{ secrets.OVH_SFTP_PASSWORD }}
+          port: ${{ secrets.OVH_SFTP_PORT }}
+          source: ".output/public/*"
+          target: ${{ secrets.OVH_SFTP_PATH }}
+          strip_components: 3
+          overwrite: true
