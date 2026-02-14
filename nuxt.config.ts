@@ -7,6 +7,7 @@ export default defineNuxtConfig({
     preset: 'static'
   },
   css: ['~/assets/css/main.css'],
+  modules: ['@nuxt/ui'],
   app: {
     head: {
       title: "EnRègle - obligationslegales.app",

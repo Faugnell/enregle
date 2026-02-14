@@ -3,11 +3,13 @@ import { ref } from "vue";
 
 const email = ref("");
 const loading = ref(false);
-const message = ref<string | null>(null);
+
+const toast = useToast();
 
 async function submit() {
+  if (loading.value) return;
+
   loading.value = true;
-  message.value = null;
 
   try {
     const res = await fetch("/api/waitlist.php", {
@@ -17,20 +19,48 @@ async function submit() {
     });
 
     if (res.ok) {
-      message.value = "✅ Merci ! Tu es sur la waitlist.";
+      toast.add({
+        title: "Merci !",
+        description: "Tu es sur la waitlist. On te prévient au lancement.",
+        color: "success",
+      });
       email.value = "";
       return;
     }
 
-    const data = await res.json().catch(() => null);
+    let data: any = null;
+    try {
+      data = await res.json();
+    } catch {
+      // ignore
+    }
 
-    if (res.status === 409) message.value = "⚠️ Cet email est déjà inscrit.";
-    else message.value = data?.error ?? "❌ Erreur, réessaie plus tard.";
+    if (res.status === 409) {
+      toast.add({
+        title: "Déjà inscrit",
+        description: "Cet email est déjà sur la liste d’attente.",
+        color: "info",
+      });
+      return;
+    }
+
+    toast.add({
+      title: "Oups…",
+      description: data?.error ?? "Erreur, réessaie plus tard.",
+      color: "warning",
+    });
+  } catch {
+    toast.add({
+      title: "Connexion impossible",
+      description: "Vérifie ta connexion et réessaie.",
+      color: "warning",
+    });
   } finally {
     loading.value = false;
   }
 }
 </script>
+
 
 
 <template>
