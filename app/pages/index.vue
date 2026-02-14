@@ -208,7 +208,7 @@ async function submit() {
           </div>
         </div>
 
-        <p class="note">Annuel : 2 mois off (plus tard — d’abord validation).</p>
+        <p class="note">Annuel : 2 mois off.</p>
       </div>
     </section>
 
