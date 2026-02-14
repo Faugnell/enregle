@@ -24,11 +24,10 @@ jobs:
       - name: Generate static site
         run: npm run generate
 
-      # Deploy via SFTP using lftp (OVH mutualisé friendly)
       - name: Install lftp
         run: sudo apt-get update && sudo apt-get install -y lftp
 
-      - name: Deploy via SFTP (OVH)
+      - name: Deploy static site + API (OVH)
         env:
           OVH_HOST: ${{ secrets.OVH_SFTP_HOST }}
           OVH_USER: ${{ secrets.OVH_SFTP_USER }}
@@ -43,12 +42,22 @@ jobs:
             *) OVH_PATH="${OVH_PATH}/" ;;
           esac
 
-          # Upload miroir : .output/public/ -> OVH_PATH (suppression des anciens fichiers)
           lftp -e "
             set sftp:auto-confirm yes;
             set net:max-retries 2;
             set net:timeout 20;
+
             open -u ${OVH_USER},${OVH_PASS} sftp://${OVH_HOST};
-            mirror -R --delete --verbose .output/public/ ${OVH_PATH};
+
+            # 1) Déploiement Nuxt statique, mais on NE TOUCHE PAS au dossier api
+            mirror -R --delete --verbose \
+              --exclude-glob api/** \
+              .output/public/ ${OVH_PATH};
+
+            # 2) Déploiement API PHP (depuis le repo)
+            # (assure-toi que server-ovh/api/waitlist.php existe)
+            mirror -R --verbose \
+              server-ovh/api/ ${OVH_PATH}api/;
+
             bye
           "
