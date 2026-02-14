@@ -5,5 +5,14 @@ export default defineNuxtConfig({
   ssr: true,
   nitro: {
     preset: 'static'
+  },
+  css: ['~/assets/css/main.css'],
+  app: {
+    head: {
+      title: "obligationslegales.app",
+      meta: [
+        { name: "description", content: "Rappels, modèles et checklists pour tes obligations légales — simple, rapide, sans blabla." }
+      ]
+    }
   }
 })
