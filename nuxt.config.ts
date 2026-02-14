@@ -12,6 +12,13 @@ export default defineNuxtConfig({
       title: "EnRègle - obligationslegales.app",
       meta: [
         { name: "description", content: "Rappels, modèles et checklists pour tes obligations légales — simple, rapide, sans blabla." }
+      ],
+      link: [
+        {
+          rel: 'icon',
+          type: 'image/x-icon',
+          href: '/favicon.ico'
+        }
       ]
     }
   }
