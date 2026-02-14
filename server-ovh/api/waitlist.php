@@ -21,7 +21,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 }
 
 // 🔐 CONFIGURATION BDD (remplace avec tes infos OVH)
-$host = 'mysql344.eu004.hosting-data.io';
+$host = 'obliganobligate.mysql.db';
 $db   = 'obliganobligate';
 $user = 'obliganobligate';
 $pass = 'c1ZthZfbJVwwLz8';
