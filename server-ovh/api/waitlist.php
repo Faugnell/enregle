@@ -54,17 +54,13 @@ try {
     echo json_encode(['ok' => true]);
 
 } catch (PDOException $e) {
+    if (isset($e->errorInfo[1]) && (int)$e->errorInfo[1] === 1062) {
+        http_response_code(409);
+        echo json_encode(['ok' => false, 'error' => 'Email already exists']);
+        exit;
+    }
 
-    // TEMP DEBUG (à enlever après)
     http_response_code(500);
-    echo json_encode([
-        'ok' => false,
-        'error' => 'Database error',
-        'debug' => [
-            'sqlstate' => $e->getCode(),
-            'message' => $e->getMessage(),
-            'errorInfo' => $e->errorInfo ?? null
-        ]
-    ]);
+    echo json_encode(['ok' => false, 'error' => 'Database error']);
     exit;
 }
