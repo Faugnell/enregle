@@ -2,7 +2,7 @@ name: Deploy to OVH (static Nuxt)
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   deploy:
@@ -24,16 +24,31 @@ jobs:
       - name: Generate static site
         run: npm run generate
 
-      # Upload only the generated static site
+      # Deploy via SFTP using lftp (OVH mutualisé friendly)
+      - name: Install lftp
+        run: sudo apt-get update && sudo apt-get install -y lftp
+
       - name: Deploy via SFTP (OVH)
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.OVH_SFTP_HOST }}
-          username: ${{ secrets.OVH_SFTP_USER }}
-          password: ${{ secrets.OVH_SFTP_PASSWORD }}
-          port: 22
-          protocol: sftp
-          local-dir: .output/public/
-          server-dir: ${{ secrets.OVH_SFTP_PATH }}
+        env:
+          OVH_HOST: ${{ secrets.OVH_SFTP_HOST }}
+          OVH_USER: ${{ secrets.OVH_SFTP_USER }}
+          OVH_PASS: ${{ secrets.OVH_SFTP_PASSWORD }}
+          OVH_PATH: ${{ secrets.OVH_SFTP_PATH }}
+        run: |
+          set -euo pipefail
 
+          # OVH_PATH doit finir par /
+          case "$OVH_PATH" in
+            */) ;;
+            *) OVH_PATH="${OVH_PATH}/" ;;
+          esac
 
+          # Upload miroir : .output/public/ -> OVH_PATH (suppression des anciens fichiers)
+          lftp -e "
+            set sftp:auto-confirm yes;
+            set net:max-retries 2;
+            set net:timeout 20;
+            open -u ${OVH_USER},${OVH_PASS} sftp://${OVH_HOST};
+            mirror -R --delete --verbose .output/public/ ${OVH_PATH};
+            bye
+          "
