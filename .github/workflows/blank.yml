@@ -25,30 +25,14 @@ jobs:
         run: npm run generate
 
       # Upload only the generated static site
-      - name: Archive static site
-        run: |
-          cd .output/public
-          tar -czf ../../site.tar.gz .
-
-      - name: Upload archive via SCP
+      - name: Upload via SFTP
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.OVH_SSH_HOST }}
-          username: ${{ secrets.OVH_SSH_USER }}
-          password: ${{ secrets.OVH_SSH_PASSWORD }}
+          host: ${{ secrets.OVH_SFTP_HOST }}
+          username: ${{ secrets.OVH_SFTP_USER }}
+          password: ${{ secrets.OVH_SFTP_PASSWORD }}
           port: 22
-          source: "site.tar.gz"
-          target: ${{ secrets.OVH_WEBROOT }}
-
-      - name: Extract on server
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.OVH_SSH_HOST }}
-          username: ${{ secrets.OVH_SSH_USER }}
-          password: ${{ secrets.OVH_SSH_PASSWORD }}
-          port: 22
-          script: |
-            cd "${{ secrets.OVH_WEBROOT }}"
-            tar -xzf site.tar.gz
-            rm site.tar.gz
+          source: ".output/public/**"
+          target: ${{ secrets.OVH_SFTP_PATH }}
+          overwrite: true
 
