@@ -83,7 +83,9 @@ async function submit() {
           <div class="cta">
             <a class="btn" href="#waitlist">Commencer (liste d’attente)</a>
             <a class="btn btn--ghost" href="#how">Voir comment ça marche</a>
+            <a class="btn btn--ghost" href="/blog">Guides gratuits</a>
           </div>
+
 
           <div class="trust">
             <span>🇫🇷 France</span>
@@ -91,6 +93,11 @@ async function submit() {
             <span>⏱ 2 min</span>
             <span>💸 dès 9€/mois</span>
           </div>
+
+          <p class="cred">
+            Pas sûr d’être à jour ? Commence par les guides : 
+            <a class="cred__link" href="/blog">Obligations 2026, URSSAF, CFE…</a>
+          </p>
         </div>
 
         <div class="card">
@@ -342,4 +349,25 @@ input:focus{
   .grid{ grid-template-columns: 1fr; }
   .pricing{ grid-template-columns: 1fr; }
 }
+
+.cred{
+  margin-top: 14px;
+  color: rgba(255,255,255,.92);
+  font-weight: 650;
+  line-height: 1.55;
+  max-width: 560px;
+  text-shadow: 1px 1px 0 rgba(0,0,0,.20);
+}
+
+.cred__link{
+  font-weight: 950;
+  color: rgba(255,242,166,.98);
+  text-decoration: none;
+  border-bottom: 2px solid rgba(255,242,166,.55);
+}
+
+.cred__link:hover{
+  border-bottom-color: rgba(255,242,166,1);
+}
+
 </style>

@@ -9,8 +9,8 @@ export default defineNuxtConfig({
     preset: 'static'
   },
 
-  modules: ['@nuxt/ui'],
-  css: ['~/assets/css/main.css'],
+  modules: ['@nuxt/ui', '@nuxt/content'],
+  css: ['~/assets/css/main.css', '~/assets/css/blog.css'],
 
   app: {
     head: {

@@ -4,6 +4,7 @@
       <div>© {{ year }} EnRègle</div>
 
       <div class="links">
+        <NuxtLink to="/blog">Blog</NuxtLink>
         <a href="#" @click.prevent="openModal('legal')">Mentions légales</a>
         <a href="#" @click.prevent="openModal('privacy')">Confidentialité</a>
         <a href="mailto:contact@obligationslegales.app">Contact</a>
@@ -26,21 +27,15 @@
           <p>Hébergement : OVHcloud, France.</p>
         </div>
 
-        <div v-if="activeModal === 'privacy'">
+        <div v-else>
           <h2>Politique de confidentialité</h2>
-          <p>
-            Nous collectons uniquement votre email pour la gestion de la liste d’attente.
-          </p>
-          <p>
-            Base légale : consentement.
-          </p>
+          <p>Nous collectons uniquement votre email pour la gestion de la liste d’attente.</p>
+          <p>Base légale : consentement.</p>
           <p>
             Vous pouvez demander la suppression de vos données à :
             contact@obligationslegales.app
           </p>
-          <p>
-            Aucune revente de données. Hébergement en UE.
-          </p>
+          <p>Aucune revente de données. Hébergement en UE.</p>
         </div>
       </div>
     </div>
@@ -97,7 +92,6 @@ a:hover{
 }
 
 /* Modal */
-
 .modalOverlay{
   position:fixed;
   inset:0;

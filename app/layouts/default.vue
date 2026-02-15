@@ -6,7 +6,7 @@ import AppFooter from "~/components/commons/AppFooter.vue"
 <template>
     <div class="w-full h-full flex flex-col justify-between">
         <AppHeader />
-        <div class="min-h-screen flex flex-col">
+        <div class="w-full h-full overflow-auto">
             <NuxtPage />
         </div>
         <AppFooter />
