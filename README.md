@@ -1,73 +1,113 @@
-# Nuxt Minimal Starter
+# EnRègle — obligationslegales.app
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Toutes vos obligations légales. Sans stress.
 
-## Setup
+EnRègle est une application SaaS destinée aux micro-entrepreneurs français.
+Elle permet d’identifier, organiser et suivre automatiquement les obligations légales liées à leur activité.
 
-Make sure to install dependencies:
+## Le problème
 
-```bash
-# npm
-npm install
+Un micro-entrepreneur doit gérer :
 
-# pnpm
-pnpm install
+- Déclarations URSSAF
+- Cotisation Foncière des Entreprises (CFE)
+- Assurances obligatoires
+- Mentions légales
+- Registres obligatoires
+- Obligations spécifiques selon l’activité
 
-# yarn
-yarn install
+Ces obligations :
 
-# bun
-bun install
-```
+- changent selon le statut
+- dépendent du secteur
+- comportent des échéances
+- sont rarement centralisées
 
-## Development Server
+Résultat : stress, erreurs, pénalités potentielles.
 
-Start the development server on `http://localhost:3000`:
+## La solution
 
-```bash
-# npm
-npm run dev
+EnRègle génère automatiquement :
 
-# pnpm
-pnpm dev
+- Une liste personnalisée d’obligations
+- Un calendrier clair des échéances
+- Des rappels automatiques
+- Des explications simples
+- Des mises à jour selon les évolutions légales
 
-# yarn
-yarn dev
+## Stack technique
 
-# bun
-bun run dev
-```
+- Frontend : Nuxt 3
+- Backend : Nitro / Node
+- Déploiement : OVH (SFTP + génération statique)
+- Base de données : à définir
+- Authentification : à définir
 
-## Production
+## Installation locale
 
-Build the application for production:
+Installation :
 
-```bash
-# npm
-npm run build
+    npm install
 
-# pnpm
-pnpm build
+Lancer le serveur de développement :
 
-# yarn
-yarn build
+    npm run dev
 
-# bun
-bun run build
-```
+Build production :
 
-Locally preview production build:
+    npm run build
 
-```bash
-# npm
-npm run preview
+Génération statique :
 
-# pnpm
-pnpm preview
+    npm run generate
 
-# yarn
-yarn preview
+## Structure du projet
 
-# bun
-bun run preview
-```
+    .
+    ├── app/
+    ├── server-ovh/
+    ├── public/
+    ├── nuxt.config.ts
+    └── package.json
+
+## Roadmap
+
+- [x] Landing page
+- [x] Système de waitlist
+- [ ] Générateur d’obligations dynamiques
+- [ ] Dashboard utilisateur
+- [ ] Notifications email
+- [ ] Système de paiement
+- [ ] Version bêta privée
+
+## Modèle économique
+
+SaaS à faible coût :
+
+1,99 € / mois
+
+Cible :
+
+- Micro-entrepreneurs sans salarié
+- Freelances
+- Auto-entrepreneurs débutants
+
+## Disclaimer
+
+Les informations fournies sont basées sur les textes officiels en vigueur (URSSAF, service-public.fr).
+
+L’application ne remplace pas un expert-comptable ou un conseil juridique.
+
+## Auteur
+
+Victor Petit  
+Étudiant ingénieur — CESI
+
+## Contact
+
+contact@obligationslegales.app
+
+## Vision
+
+Simplifier radicalement l’administratif des micro-entrepreneurs.
+Moins de paperasse. Plus de focus business.
