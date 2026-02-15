@@ -55,90 +55,58 @@ function openModal(type: "legal" | "privacy") {
 
 <style scoped>
 .footer{
-  border-top: 2px solid rgba(0,0,0,.92);
-  padding: 22px 0;
-  color: rgba(233,240,255,.75);
-  background: rgba(30,47,209,.85);
-  backdrop-filter: blur(10px);
-  position: relative;
+  border-top:1px solid rgba(255,255,255,.08);
+  padding:20px 0;
+  color:rgba(233,240,255,.65);
+  background:rgba(0,0,0,.15);
+  position:relative;
 }
 
 .container{
   max-width:1040px;
-  margin:0 auto;
-  padding:0 20px;
+  margin:0 auto; padding:0 20px;
 }
-
 .inner{
   display:flex;
   justify-content:space-between;
-  gap:14px;
+  gap:12px;
   flex-wrap:wrap;
-  align-items:center;
 }
-
 .links{
   display:flex;
-  gap:16px;
+  gap:14px;
   flex-wrap:wrap;
 }
-
-.links a{
-  color: rgba(255,255,255,.9);
-  text-decoration:none;
-  font-weight:800;
-  transition:.15s ease;
+a{
+  color:inherit; 
+  text-decoration:none; 
+  cursor:pointer;
+}
+a:hover{
+  color:rgba(234,240,255,1);
 }
 
-.links a:hover{
-  color:#fff;
-  text-decoration: underline;
-  text-underline-offset:4px;
-}
-
-/* =========================
-   MODAL OVERLAY
-========================= */
-
+/* Modal */
 .modalOverlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.65);
-  backdrop-filter:blur(8px);
-  display:flex;
-  align-items:center;
+  background:rgba(0,0,0,.6);
+  backdrop-filter:blur(6px);
+  display:flex; align-items:center;
   justify-content:center;
   z-index:1000;
 }
-
-/* =========================
-   MODAL CONTAINER
-========================= */
-
 .modal{
-  position:relative;
-
-  max-width:560px;
+  background:#111827;
+  max-width:520px;
   width:90%;
-
-  padding:28px 24px 24px;
-
-  border-radius:20px;
-
-  background: rgba(17,24,39,.94);
-  backdrop-filter: blur(14px);
-
-  border: 2px solid rgba(0,0,0,.85);
-  box-shadow: 12px 12px 0 rgba(0,0,0,.25);
-
-  color: rgba(255,255,255,.92);
-  line-height:1.65;
+  padding:24px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.1);
+  position:relative;
+  color:rgba(255,255,255,.9);
+  line-height:1.6;
 }
-
-/* =========================
-   MODAL TITLE (STICKER STYLE)
-========================= */
-
 .modal h2{
   margin: 0 0 16px;
   display: inline-block;
@@ -162,69 +130,14 @@ function openModal(type: "legal" | "privacy") {
 
   transform: rotate(-1deg);
 }
-
-/* =========================
-   MODAL TEXT
-========================= */
-
-.modal p{
-  margin: 10px 0;
-  color: rgba(255,255,255,.88);
-}
-
-.modal strong{
-  color: #fff;
-}
-
-/* =========================
-   CLOSE BUTTON
-========================= */
-
 .close{
   position:absolute;
-  top:12px;
+  top:10px;
   right:14px;
-
-  width:40px;
-  height:40px;
-
-  border-radius:14px;
-
-  display:grid;
-  place-items:center;
-
-  background: rgba(255,255,255,.08);
-  border: 2px solid rgba(255,255,255,.15);
-
-  font-size:20px;
-  color: rgba(255,255,255,.95);
-
+  background:none;
+  border:none;
+  font-size:22px;
+  color:white;
   cursor:pointer;
-
-  transition: transform .12s ease, background .15s ease;
-}
-
-.close:hover{
-  transform: translate(-2px,-2px);
-  background: rgba(255,255,255,.18);
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media (max-width:520px){
-  .inner{
-    flex-direction:column;
-    align-items:flex-start;
-  }
-
-  .links{
-    gap:10px;
-  }
-
-  .modal{
-    padding:22px 18px;
-  }
 }
 </style>
