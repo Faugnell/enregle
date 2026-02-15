@@ -23,6 +23,12 @@ export default defineNuxtConfig({
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      ],
+      script: [
+        {
+          async: true,
+          src: "https://plausible.io/js/pa-PZSUqmXf-c5MEcNDNgGLw.js"
+        }
       ]
     }
   }
