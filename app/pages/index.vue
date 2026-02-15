@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { onMounted } from "vue";
+onMounted(() => {
+  useToast().add({ title: "Toast mounted", description: "OK", color: "success" });
+});
 
 const email = ref("");
 const loading = ref(false);

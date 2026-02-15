@@ -6,8 +6,8 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'static'
   },
-  css: ['~/assets/css/main.css'],
   modules: ['@nuxt/ui'],
+  css: ['~/assets/css/main.css'],
   app: {
     head: {
       title: "EnRègle - obligationslegales.app",
