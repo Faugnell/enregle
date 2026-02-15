@@ -2,20 +2,27 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  ssr: true,
+
+  // Landing statique
+  ssr: false,
   nitro: {
     preset: 'static'
   },
+
   modules: ['@nuxt/ui'],
   css: ['~/assets/css/main.css'],
+
   app: {
     head: {
       title: "EnRègle - obligationslegales.app",
       meta: [
-        { name: "description", content: "Rappels, modèles et checklists pour tes obligations légales — simple, rapide, sans blabla." }
+        {
+          name: "description",
+          content: "Rappels, modèles et checklists pour tes obligations légales — simple, rapide, sans blabla."
+        }
       ],
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/public/favicon.ico' }
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
       ]
     }
   }

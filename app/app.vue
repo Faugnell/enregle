@@ -1,11 +1,12 @@
 <script setup lang="ts">
-const appConfig = useAppConfig()
+const appConfig = useAppConfig();
 </script>
 
 <template>
-  <UApp :toaster="appConfig.toaster">
-    <NuxtLayout>
-      <NuxtPage />
-    </NuxtLayout>
-  </UApp>
+    <UApp :toaster="appConfig.toaster">
+        <NuxtRouteAnnouncer />
+        <NuxtLayout>
+            <NuxtPage />
+        </NuxtLayout>
+    </UApp>
 </template>
