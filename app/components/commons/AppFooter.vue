@@ -55,11 +55,12 @@ function openModal(type: "legal" | "privacy") {
 
 <style scoped>
 .footer{
-  border-top:1px solid rgba(255,255,255,.08);
-  padding:20px 0;
-  color:rgba(233,240,255,.65);
-  background:rgba(0,0,0,.15);
-  position:relative;
+  border-top: 2px solid rgba(0,0,0,.92);
+  padding: 22px 0;
+  color: rgba(233,240,255,.75);
+  background: rgba(30,47,209,.85);
+  backdrop-filter: blur(10px);
+  position: relative;
 }
 
 .container{
@@ -71,63 +72,159 @@ function openModal(type: "legal" | "privacy") {
 .inner{
   display:flex;
   justify-content:space-between;
-  gap:12px;
+  gap:14px;
   flex-wrap:wrap;
+  align-items:center;
 }
 
 .links{
   display:flex;
-  gap:14px;
+  gap:16px;
   flex-wrap:wrap;
 }
 
-a{
-  color:inherit;
+.links a{
+  color: rgba(255,255,255,.9);
   text-decoration:none;
-  cursor:pointer;
+  font-weight:800;
+  transition:.15s ease;
 }
 
-a:hover{
-  color:rgba(234,240,255,1);
+.links a:hover{
+  color:#fff;
+  text-decoration: underline;
+  text-underline-offset:4px;
 }
 
-/* Modal */
+/* =========================
+   MODAL OVERLAY
+========================= */
+
 .modalOverlay{
   position:fixed;
   inset:0;
-  background:rgba(0,0,0,.6);
-  backdrop-filter:blur(6px);
+  background:rgba(0,0,0,.65);
+  backdrop-filter:blur(8px);
   display:flex;
   align-items:center;
   justify-content:center;
   z-index:1000;
 }
 
+/* =========================
+   MODAL CONTAINER
+========================= */
+
 .modal{
-  background:#111827;
-  max-width:520px;
-  width:90%;
-  padding:24px;
-  border-radius:18px;
-  border:1px solid rgba(255,255,255,.1);
   position:relative;
-  color:rgba(255,255,255,.9);
-  line-height:1.6;
+
+  max-width:560px;
+  width:90%;
+
+  padding:28px 24px 24px;
+
+  border-radius:20px;
+
+  background: rgba(17,24,39,.94);
+  backdrop-filter: blur(14px);
+
+  border: 2px solid rgba(0,0,0,.85);
+  box-shadow: 12px 12px 0 rgba(0,0,0,.25);
+
+  color: rgba(255,255,255,.92);
+  line-height:1.65;
 }
 
+/* =========================
+   MODAL TITLE (STICKER STYLE)
+========================= */
+
 .modal h2{
-  margin-top:0;
-  font-size:20px;
+  margin: 0 0 16px;
+  display: inline-block;
+
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: .6px;
+
+  font-size: 20px;
+  line-height: 1.05;
+
+  background: var(--paper-2);
+  color: var(--ink);
+
+  border: 2px solid rgba(0,0,0,.92);
+  border-radius: 14px;
+
+  padding: 10px 14px;
+
+  box-shadow: var(--shadow-sm);
+
+  transform: rotate(-1deg);
 }
+
+/* =========================
+   MODAL TEXT
+========================= */
+
+.modal p{
+  margin: 10px 0;
+  color: rgba(255,255,255,.88);
+}
+
+.modal strong{
+  color: #fff;
+}
+
+/* =========================
+   CLOSE BUTTON
+========================= */
 
 .close{
   position:absolute;
-  top:10px;
+  top:12px;
   right:14px;
-  background:none;
-  border:none;
-  font-size:22px;
-  color:white;
+
+  width:40px;
+  height:40px;
+
+  border-radius:14px;
+
+  display:grid;
+  place-items:center;
+
+  background: rgba(255,255,255,.08);
+  border: 2px solid rgba(255,255,255,.15);
+
+  font-size:20px;
+  color: rgba(255,255,255,.95);
+
   cursor:pointer;
+
+  transition: transform .12s ease, background .15s ease;
+}
+
+.close:hover{
+  transform: translate(-2px,-2px);
+  background: rgba(255,255,255,.18);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width:520px){
+  .inner{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .links{
+    gap:10px;
+  }
+
+  .modal{
+    padding:22px 18px;
+  }
 }
 </style>
