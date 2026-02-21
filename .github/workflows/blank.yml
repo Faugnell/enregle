@@ -33,6 +33,7 @@ jobs:
           OVH_USER: ${{ secrets.OVH_SFTP_USER }}
           OVH_PASS: ${{ secrets.OVH_SFTP_PASSWORD }}
           OVH_PATH: ${{ secrets.OVH_SFTP_PATH }}
+          NUXT_PUBLIC_SITE_URL: ${{ secrets.NUXT_PUBLIC_SITE_URL }}
         run: |
           set -euo pipefail
 
