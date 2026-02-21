@@ -9,7 +9,7 @@ export default defineNuxtConfig({
     preset: 'static'
   },
 
-  modules: ['@nuxt/ui', '@nuxt/content'],
+  modules: ['@nuxt/ui', '@nuxt/content', '@nuxtjs/sitemap'],
   css: ['~/assets/css/main.css', '~/assets/css/blog.css'],
 
   app: {
@@ -31,5 +31,19 @@ export default defineNuxtConfig({
         }
       ]
     }
+  }
+  sitemap: {
+    siteUrl: 'https://obligationslegales.app',
+    sources: [
+      async () => {
+        const { $content } = await import('#content/server')
+        const articles = await $content('blog').find()
+
+        return articles.map(article => ({
+          loc: `/blog/${article._path.split('/').pop()}`,
+          lastmod: article.updatedAt || article.date
+        }))
+      }
+    ]
   }
 })
