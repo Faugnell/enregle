@@ -31,7 +31,7 @@ export default defineNuxtConfig({
         }
       ]
     }
-  }
+  },
   sitemap: {
     siteUrl: 'https://obligationslegales.app',
     sources: [
