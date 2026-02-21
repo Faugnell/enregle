@@ -1,16 +1,19 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
+// nuxt.config.ts
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
 
   // Landing statique
   ssr: false,
-  nitro: {
-    preset: 'static'
-  },
+  nitro: { preset: 'static' },
 
   modules: ['@nuxt/ui', '@nuxt/content', '@nuxtjs/sitemap'],
   css: ['~/assets/css/main.css', '~/assets/css/blog.css'],
+
+  site: {
+    url: 'https://obligationslegales.app',
+    name: 'EnRègle'
+  },
 
   app: {
     head: {
@@ -18,31 +21,30 @@ export default defineNuxtConfig({
       meta: [
         {
           name: "description",
-          content: "Rappels, modèles et checklists pour tes obligations légales — simple, rapide, sans blabla."
+          content:
+            "Rappels, modèles et checklists pour tes obligations légales — simple, rapide, sans blabla."
         }
       ],
-      link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-      ],
+      link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
       script: [
-        {
-          async: true,
-          src: "https://plausible.io/js/pa-PZSUqmXf-c5MEcNDNgGLw.js"
-        }
+        { async: true, src: "https://plausible.io/js/pa-PZSUqmXf-c5MEcNDNgGLw.js" }
       ]
     }
   },
+
   sitemap: {
-    siteUrl: 'https://obligationslegales.app',
+    urls: ['/', '/blog'],
     sources: [
       async () => {
-        const { $content } = await import('#content/server')
-        const articles = await $content('blog').find()
+        const { queryCollection } = await import('#content/server')
+        const articles = await queryCollection('blog').all()
 
-        return articles.map(article => ({
-          loc: `/blog/${article._path.split('/').pop()}`,
-          lastmod: article.updatedAt || article.date
-        }))
+        return articles
+          .filter((a: any) => a?._path)
+          .map((a: any) => ({
+            loc: a._path,
+            lastmod: a.updatedAt || a.date
+          }))
       }
     ]
   }
